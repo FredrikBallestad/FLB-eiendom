@@ -7,11 +7,11 @@ export default function Header() {
     // Komponent logikk, om nødvendig...
   
     return (
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-white border-b shadow-sm sticky top-0 z-50">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center">
             {/* Husk å bytte ut sti og størrelser til ditt faktiske bilde */}
-            <img src="/path-to-your/logo.png" alt="FLB Eiendom" width="100" height="50" />
+            <img src="/images/FLB-eiendom-logo.webp" alt="Logo" style={{ maxHeight: '50px', width: 'auto' }} />
           </div>
   
           {/* Navigasjonslenker */}
