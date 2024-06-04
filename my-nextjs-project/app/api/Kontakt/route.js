@@ -1,12 +1,13 @@
+import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { navn, epost, telefon, melding } = req.body;
+export async function POST(req) {
+  try {
+    const { navn, epost, telefon, melding } = await req.json();
+    console.log("Received form data: ", { navn, epost, telefon, melding });
 
-    // Opprett transportøren ved å bruke nodemailer
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // Du kan bruke hvilken som helst e-posttjeneste
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -25,13 +26,11 @@ export default async function handler(req, res) {
       `,
     };
 
-    try {
-      await transporter.sendMail(mailOptions);
-      res.status(200).json({ success: true });
-    } catch (error) {
-      res.status(500).json({ success: false, message: error.message });
-    }
-  } else {
-    res.status(405).json({ message: 'Metoden ikke tillatt' });
+    let info = await transporter.sendMail(mailOptions);
+    console.log("Email sent: ", info.response);
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    return NextResponse.json({ success: false, message: error.message }, { status: 500 });
   }
 }

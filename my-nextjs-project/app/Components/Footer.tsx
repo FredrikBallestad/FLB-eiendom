@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             {/* Din logo og kontaktinfo her */}
-            <img src="/logo.png" alt="FLB Eiendom Logo" className="w-32 mb-4" />
+            <img src="/images/FLB-eiendom-logo.webp" alt="FLB Eiendom Logo" className="w-32 mb-4" />
             <p>+47 41250820</p>
             <p>FLB-eiendom@gmail.com</p>
             <p>FLB Asset Management</p>
