@@ -1,4 +1,4 @@
-"use client"
+/*"use client"
 import { useEffect, useState } from 'react';
 
 interface Eiendom {
@@ -51,6 +51,37 @@ const Eiendommer = () => {
   );
 };
 
-export default Eiendommer;
+export default Eiendommer;*/
 
 
+"use client"
+import { useEffect, useState } from "react";
+
+export default function Page() {
+    const fetchEiendommer = async () => {
+        const res = await fetch("http://localhost:3000/api/Eiendommer");
+        const eiendommer = await res.json();
+        return eiendommer;
+    };
+
+    const [eiendommer, setEiendommer] = useState([]);
+
+    useEffect(() => {
+        fetchEiendommer().then((eiendommer) => {
+            setEiendommer(eiendommer);
+        });
+    }, []);
+
+    return (
+        <div>
+            <h1>Eiendommer</h1>
+            {eiendommer.map((eiendommer: any) => (
+                <div key={eiendommer._id}>
+                    <h2>{eiendommer.title}</h2>
+                    <p>{eiendommer.description}</p>
+                    <p>{eiendommer.price}</p>
+                </div>
+            ))}
+        </div>
+    );
+}
