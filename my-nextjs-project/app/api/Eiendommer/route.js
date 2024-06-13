@@ -1,26 +1,3 @@
-/*import clientPromise from '../../lib/db';
-
-export default async (req, res) => {
-    const client = await clientPromise;
-    const db = client.db('sample_mflix');
-
-    switch (req.method) { 
-        case 'GET':
-            const eiendommer = await db.collection('Eiendommer').find({}).toArray();
-            res.status(200).json(eiendommer);
-            break;
-
-        case 'POST':
-            const newComment = req.body;
-            await db.collection('Eiendommer').insertOne(newComment);
-            res.status(201).json({ status: 'ok' });
-            break;
-        default:
-            res.setHeader('Allow', ['GET', 'POST']);
-            res.status(405).end(`Method ${req.method} Not Allowed`); 
-    }
-};*/
-
 /*import clientPromise from '../../lib/db'; // Importerer clientPromise riktig
 
 // GET handler
@@ -55,7 +32,7 @@ export default async function handler(req, res) {
   }
 }*/
 
-import clientPromise from '../../lib/db'; // Korrekt import
+/*import clientPromise from '../../lib/db'; // Korrekt import
 
 // Håndter GET-forespørsler
 export async function GET(req, res) {
@@ -86,3 +63,4 @@ export async function POST(req, res) {
 
 // Eksporter GET og POST metoder navngitt
 export { GET, POST };
+*/
