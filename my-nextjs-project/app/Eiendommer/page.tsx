@@ -56,6 +56,9 @@ export default Eiendommer;*/
 
 "use client"
 import { useEffect, useState } from "react";
+import Link from 'next/link';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Page() {
     const fetchEiendommer = async () => {
@@ -74,14 +77,23 @@ export default function Page() {
 
     return (
         <div>
-            <h1>Eiendommer</h1>
-            {eiendommer.map((eiendommer: any) => (
-                <div key={eiendommer._id}>
-                    <h2>{eiendommer.title}</h2>
-                    <p>{eiendommer.description}</p>
-                    <p>{eiendommer.price}</p>
-                </div>
-            ))}
-        </div>
+          <Header />
+          <h1 className="text-3xl font-bold mb-4">Eiendommer</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {eiendommer.map((eiendom: any) => (
+                    <Link href={`/eiendom/${eiendom._id}`} key={eiendom._id}>
+                    <div className="border rounded-lg shadow hover:shadow-lg transition-shadow duration-200 bg-white h-[500px] flex flex-col">
+                        <img src={eiendom.image} alt={eiendom.title} className="w-full h-80 object-cover rounded-t-lg" />
+                        <div className="p-4 flex-grow flex flex-col">
+                            <h2 className="text-xl font-bold mb-2">{eiendom.title}</h2>
+                            <p className="mb-2 flex-grow overflow-hidden">{eiendom.description}</p>
+                            <p className="text-gray-600 mb-4">{eiendom.price} kr/mnd</p>
+                            <p className="text-sm text-gray-500">Ekstra tekst eller innhold kan legges til her.</p>
+                        </div>
+                    </div>
+                </Link>
+                ))}
+          </div>
+      </div>
     );
 }
