@@ -17,6 +17,8 @@ interface IEiendom extends Document {
     contactPhone: string;
     amenities: string[];
     utilitiesIncluded: string[];
+    latitude: Number 
+    longitude: Number
 }
 
 // Opprett skjemaet basert på det nye Eiendom-grensesnittet
@@ -79,6 +81,14 @@ const eiendomSchema: Schema = new mongoose.Schema({
     utilitiesIncluded: {
         type: [String],
         required: true,
+    },
+    latitude: { 
+        type: Number, 
+        required: true 
+    },   
+    longitude: { 
+        type: Number, 
+        required: true 
     },
 });
 
