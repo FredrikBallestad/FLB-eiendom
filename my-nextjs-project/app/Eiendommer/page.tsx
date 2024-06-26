@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import MapComponent from '../Components/MapComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBed, faBath } from '@fortawesome/free-solid-svg-icons';
 
 export default function Page() {
     const fetchEiendommer = async () => {
@@ -45,17 +47,25 @@ export default function Page() {
                                   <span className="text-gray-500">No Image Available</span>
                               </div>
                           )}
-                          <div className="mt-4"> {/* Margin-top for å skille bildet fra teksten */}
-                              <h2 className="text-xl font-bold mb-2">{eiendom.address}</h2>
-                              <p className="mb-2 overflow-hidden text-ellipsis">{eiendom.description}</p>
-                              <p className="text-gray-600">{eiendom.price} kr/mnd</p>
-                              <p className="text-sm text-gray-500">Ekstra tekst eller innhold kan legges til her.</p>
-                          </div>
+                          <div className="mt-4 px-4 text-center">
+                                <p className="text-lg italic text-gray-500">{eiendom.location}</p>
+                                <h2 className="text-2xl font-bold mt-6 mb-2">{eiendom.address}</h2>
+                                <div className="flex justify-center space-x-16 text-gray-600 mt-8">
+                                    <div className="flex items-center">
+                                        <FontAwesomeIcon icon={faBed} className="text-2xl mr-1" />
+                                        <p className="text-2xl">{eiendom.bedrooms}</p>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <FontAwesomeIcon icon={faBath} className="text-2xl mr-1" />
+                                        <p className="text-2xl">{eiendom.bathrooms}</p>
+                                    </div>
+                                </div>
+                            </div> 
                       </div>
                   </Link>
               ))}
           </div>
-          <MapComponent />
+          <MapComponent eiendommer={eiendommer} />
           <Footer />
       </div>
     )
