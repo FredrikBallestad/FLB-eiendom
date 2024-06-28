@@ -98,6 +98,7 @@ interface IEiendom extends Document {
     description: string;
     imageUrl: string;
     address: string;
+    slug: string;
     price: number;
     bedrooms: number;
     bathrooms: number;
@@ -134,6 +135,11 @@ const eiendomSchema: Schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    slug: {
+         type: String, 
+         required: true, 
+         unique: true 
+        },
     price: {
         type: Number,
         required: true,
