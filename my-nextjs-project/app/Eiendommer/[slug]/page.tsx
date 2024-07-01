@@ -1,7 +1,9 @@
-import Header from '../../Components/Header';
+/*import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import dbConnect from '../../lib/dbConnect';
 import Eiendom from '../../models/Eiendommer';
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
 
 async function getEiendom(slug: string) {
   await dbConnect();
@@ -11,6 +13,11 @@ async function getEiendom(slug: string) {
 
 const EiendomDetails = async ({ params }: { params: { slug: string } }) => {
   const eiendom = await getEiendom(params.slug);
+
+  const images = eiendom.images.map((url: string) => ({
+    original: url,
+    thumbnail: url,
+  }));
 
   return (
     <div>
@@ -37,5 +44,40 @@ const EiendomDetails = async ({ params }: { params: { slug: string } }) => {
     </div>
   );
 };
+
+export default EiendomDetails;*/
+
+import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
+import dbConnect from '../../lib/dbConnect';
+import Eiendom from '../../models/Eiendommer';
+import EiendomDetailsClient from './EiendomDetailsClient';
+
+async function getEiendom(slug: string) {
+  await dbConnect();
+  const eiendom = await Eiendom.findOne({ slug }).lean();
+  console.log("Eiendom hentet fra DB:", eiendom);
+  return JSON.parse(JSON.stringify(eiendom));
+}
+
+const EiendomDetails = async ({ params }: { params: { slug: string } }) => {
+  const eiendom = await getEiendom(params.slug);
+
+  return (
+    <div>
+      <Header />
+      <EiendomDetailsClient eiendom={eiendom} />
+      <Footer />
+    </div>
+  );
+};
+
+export async function generateStaticParams() {
+  await dbConnect();
+  const eiendoms = await Eiendom.find({}, 'slug').lean();
+  return eiendoms.map((eiendom: any) => ({
+    slug: eiendom.slug,
+  }));
+}
 
 export default EiendomDetails;

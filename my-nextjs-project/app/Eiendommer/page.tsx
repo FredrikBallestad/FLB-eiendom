@@ -6,7 +6,6 @@ import Footer from '../Components/Footer';
 import MapComponent from '../Components/MapComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faBath } from '@fortawesome/free-solid-svg-icons';
-import FontComponent from '../Components/FontComponent';
 
 export default function Page() {
     const fetchEiendommer = async () => {

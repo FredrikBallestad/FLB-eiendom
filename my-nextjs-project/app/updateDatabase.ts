@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+/*const { MongoClient } = require('mongodb');
 const slugify = require('slugify');
 
 const uri = 'mongodb+srv://FLBEIENDOM:FLBEIENDOM@cluster0.sumlq7l.mongodb.net/sample_mflix?retryWrites=true&w=majority';  // Sett inn din MongoDB tilkoblingsstreng her
@@ -30,4 +30,4 @@ const updateSlugs = async () => {
   }
 };
 
-updateSlugs().catch(console.error);
+updateSlugs().catch(console.error);*/

@@ -31,7 +31,7 @@ const MapComponent = ({ eiendommer }) => {
   
   
   return (
-    <div style={{ height: '500px', width: '100%' }}> {/* Sett høyden her */}
+    <div style={{ height: '600px', width: '100%' }}> {/* Sett høyden her */}
       <MapContainer center={position} zoom={13} scrollWheelZoom={false} gestureHandling={true} style={{ height: '100%', width: '100%' }}> {/* Bruk 100% her */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
