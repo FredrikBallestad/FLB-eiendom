@@ -75,14 +75,14 @@ export default EiendomImageGalleryClient;*/
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper'
-import { Navigation, Pagination, Thumbs } from 'swiper/modules';
+import { Navigation, Thumbs } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
 
 
-SwiperCore.use([Navigation, Pagination, Thumbs]);
+SwiperCore.use([Navigation, Thumbs]);
 
 interface EiendomImageGalleryClientProps {
   images: string[];
@@ -133,7 +133,7 @@ const EiendomImageGalleryClient: React.FC<EiendomImageGalleryClientProps> = ({ i
       )}
       {modalIsOpen && (
         <div className="fixed inset-0 flex justify-center items-center z-50">
-          <div className="fixed inset-0 bg-black opacity-75"></div>
+          <div className="fixed inset-0 bg-black opacity-90"></div> {/* Endre opacity verdien her for å justere gjennomsiktigheten */}
           <div className="relative bg-transparent w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-lg shadow-lg z-50">
             <button
               onClick={closeModal}
@@ -148,7 +148,6 @@ const EiendomImageGalleryClient: React.FC<EiendomImageGalleryClientProps> = ({ i
               spaceBetween={10}
               slidesPerView={1}
               navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
-              pagination={{ clickable: true }}
               thumbs={{ swiper: thumbsSwiper }}
               onSlideChange={() => console.log('slide change')}
               onSwiper={(swiper) => console.log('Swiper:', swiper)}
