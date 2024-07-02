@@ -132,8 +132,9 @@ const EiendomImageGalleryClient: React.FC<EiendomImageGalleryClientProps> = ({ i
         </div>
       )}
       {modalIsOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-50">
-          <div className="relative bg-white w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-lg shadow-lg">
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          <div className="fixed inset-0 bg-black opacity-75"></div>
+          <div className="relative bg-transparent w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-lg shadow-lg z-50">
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 text-gray-900 bg-gray-300 rounded-full p-2 focus:outline-none z-50"
@@ -151,7 +152,7 @@ const EiendomImageGalleryClient: React.FC<EiendomImageGalleryClientProps> = ({ i
               thumbs={{ swiper: thumbsSwiper }}
               onSlideChange={() => console.log('slide change')}
               onSwiper={(swiper) => console.log('Swiper:', swiper)}
-              className="rounded-lg max-h-[75vh]"
+              className="bg-transparent rounded-lg max-h-[75vh]"
               style={{ height: '75vh' }} // Set height to 75vh
             >
               {formattedImages.map((img, index) => (
