@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className="bg-white border-b shadow-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-6 py-6 flex justify-between items-center">
+      <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center">
           <img src="/images/FLB-eiendom-logo.webp" alt="Logo" style={{ maxHeight: '50px', width: 'auto' }} />
         </div>

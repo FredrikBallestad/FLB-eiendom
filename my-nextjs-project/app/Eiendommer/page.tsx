@@ -28,7 +28,7 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4 lg:px-8 mt-16 mb-16">
                 {eiendommer.map((eiendom: any) => (
                     <Link href={`/Eiendommer/${eiendom.slug}`} key={eiendom.slug}>
-                        <div className="border rounded-lg shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 duration-200 bg-white h-[600px] flex flex-col p-4">
+                        <div className="border rounded-lg shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 duration-200 bg-white h-[500px] flex flex-col p-4">
                             {eiendom.imageUrl ? (
                                 <img
                                     src={eiendom.imageUrl}
