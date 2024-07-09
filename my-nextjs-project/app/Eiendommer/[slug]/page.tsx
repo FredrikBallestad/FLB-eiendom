@@ -67,6 +67,8 @@ const EiendomDetails = async ({ params }: EiendomDetailsProps) => {
     <div>
       <Header />
         <EiendomImageGalleryClient images={eiendom.images} />
+        <p className="text-lg mb-2"> {eiendom.address}</p>
+        <p className="text-lg mb-2"> {eiendom.description}</p>
       <Footer />
     </div>
   );
