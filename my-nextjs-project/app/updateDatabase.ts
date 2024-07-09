@@ -34,7 +34,7 @@ updateSlugs().catch(console.error);*/
 
 
 
-
+/* 
 const { MongoClient, ObjectId } = require('mongodb');
 
 const uri = 'mongodb+srv://FLBEIENDOM:FLBEIENDOM@cluster0.sumlq7l.mongodb.net/sample_mflix?retryWrites=true&w=majority';
@@ -114,4 +114,75 @@ addOrUpdateRoomBySlug('johan-schaanningsgate-86b', null, updatedRoomData).catch(
 };*/
 
 // Uncomment this line to add a new room
-// addOrUpdateRoomBySlug('din-slug-her', null, newRoomData).catch(console.error);
+// addOrUpdateRoomBySlug('din-slug-her', null, newRoomData).catch(console.error);*/
+
+const { MongoClient } = require('mongodb');
+
+const uri = 'mongodb+srv://FLBEIENDOM:FLBEIENDOM@cluster0.sumlq7l.mongodb.net/sample_mflix?retryWrites=true&w=majority';
+const client = new MongoClient(uri);
+
+async function addOrUpdateRoomBySlug(slug: string, roomData: {
+  roomNumber: number;
+  title: string;
+  description: string;
+  price: number;
+  size: number;
+  availableFrom: Date;
+  isAvailable: boolean;
+}) {
+  try {
+    await client.connect();
+    const database = client.db('sample_mflix');
+    const collection = database.collection('eiendoms');
+
+    const eiendom = await collection.findOne({ slug });
+
+    if (!eiendom) {
+      console.log('Eiendom not found');
+      return;
+    }
+
+    const roomIndex = eiendom.rooms.findIndex((room: any) => room.roomNumber === roomData.roomNumber);
+    if (roomIndex > -1) {
+      // Oppdater det spesifikke rommet
+      eiendom.rooms[roomIndex] = { ...eiendom.rooms[roomIndex], ...roomData };
+      console.log('Room updated successfully');
+    } else {
+      // Opprett et nytt rom
+      eiendom.rooms.push(roomData);
+      console.log('Room added successfully');
+    }
+
+    await collection.updateOne({ slug }, { $set: { rooms: eiendom.rooms } });
+  } catch (error) {
+    console.error('Error updating or adding room:', error);
+  } finally {
+    await client.close();
+  }
+}
+
+// Eksempel på hvordan du kan bruke funksjonen for å oppdatere et rom
+const updatedRoomData = {
+  roomNumber: 3,
+  title: "Oppdatert Rom 1",
+  description: "Oppdatert beskrivelse",
+  price: 4500,
+  size: 10,
+  availableFrom: new Date("2024-08-01"),
+  isAvailable: true,
+};
+addOrUpdateRoomBySlug('johan-schaanningsgate-86b', updatedRoomData).catch(console.error);
+
+// Eksempel på hvordan du kan bruke funksjonen for å opprette et nytt rom
+const newRoomData = {
+  roomNumber: 2,
+  title: "Nytt Rom 2",
+  description: "Beskrivelse av nytt rom",
+  price: 6000,
+  size: 15,
+  availableFrom: new Date("2024-09-01"),
+  isAvailable: true,
+};
+
+// Uncomment this line to add a new room
+// addOrUpdateRoomBySlug('johan-schaanningsgate-86b', newRoomData).catch(console.error);
