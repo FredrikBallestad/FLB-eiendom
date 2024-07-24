@@ -7,7 +7,8 @@ interface IRoom {
     price: number;
     size: number;
     availableFrom: Date;
-    isAvailable: Boolean
+    isAvailable: Boolean;
+    images: string[];
 }
 
 interface IEiendom extends Document {
@@ -63,6 +64,10 @@ const RoomSchema: Schema = new mongoose.Schema({
     },
     isAvailable: {
         type: Boolean,
+        required: true,
+    },
+    images: {
+        type: [String],
         required: true,
     },
 });
