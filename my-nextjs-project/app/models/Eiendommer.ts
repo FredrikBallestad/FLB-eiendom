@@ -9,13 +9,14 @@ interface IRoom {
     availableFrom: Date;
     isAvailable: Boolean;
     images: string[];
+    roomFrontImage: string;
 }
 
 interface IEiendom extends Document {
     _id: string;
     title: string;
     description: string;
-    imageUrl: string;
+    propertyFrontImage: string;
     address: string;
     slug: string;
     price: number;
@@ -70,6 +71,10 @@ const RoomSchema: Schema = new mongoose.Schema({
         type: [String],
         required: true,
     },
+    roomFrontImage: {
+        type: String,
+        required: true,
+    },
 });
 
 const eiendomSchema: Schema = new mongoose.Schema({
@@ -84,7 +89,7 @@ const eiendomSchema: Schema = new mongoose.Schema({
     description: {
         type: String,
     },
-    imageUrl: {
+    propertyFrontImage: { 
         type: String,
         required: true,
     },

@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+/*const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://FLBEIENDOM:FLBEIENDOM@cluster0.sumlq7l.mongodb.net/sample_mflix?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
@@ -14,6 +14,7 @@ async function addOrUpdateRoomBySlug(slug: string, roomData: {
   availableFrom: Date;
   isAvailable: boolean;
   images: string[];
+  frontImage: string;
 }) {
   try {
     await client.connect();
@@ -61,12 +62,13 @@ const updatedRoomData = {
     'https://example.com/image1.jpg',
     'https://example.com/image2.jpg'
   ],
+  frontImage: "frontimage.jpg",
 };
 
 //Kjører funksjonen med eiendommen man ønsker å påvirke med romdata som gjør at man enten legger til et nytt rom eller endrer eksisterende romdata til et spesifikt rom. 
-//addOrUpdateRoomBySlug('johan-schaanningsgate-86b', updatedRoomData).catch(console.error);
+addOrUpdateRoomBySlug('johan-schaanningsgate-86b', updatedRoomData).catch(console.error);
 
-//Legger til bilder for rom basert på slug og romnummer. images er listen som legger til de rette bildene.
+//Legger til bilder for listen av bilder for rom basert på slug og romnummer. images er listen som legger til de rette bildene.
 async function addImagesToRoom(slug: string, roomNumber: number, images: string[]) {
   try {
     await client.connect();
@@ -107,3 +109,54 @@ const newImages = [
 
 //Kjører funksjonen der man spesifiserer addressen, hvilken rom det gjelder og til slutt listen av bilder man ønsker å legge til
 //addImagesToRoom('johan-schaanningsgate-86b', 1, newImages).catch(console.error);
+
+*/
+const { MongoClient } = require('mongodb');
+
+const uri = 'mongodb+srv://FLBEIENDOM:FLBEIENDOM@cluster0.sumlq7l.mongodb.net/sample_mflix?retryWrites=true&w=majority';
+const client = new MongoClient(uri);
+
+const updateImageFields = async () => {
+  try {
+    await client.connect();
+    const database = client.db('sample_mflix');
+    const collection = database.collection('eiendoms');
+
+    // Oppdater eiendommer med propertyFrontImage
+    await collection.updateMany(
+      { imageUrl: { $exists: true } },
+      { $rename: { 'imageUrl': 'propertyFrontImage' } }
+    );
+
+    // Oppdater rom med roomFrontImage
+    const eiendommer = await collection.find().toArray();
+
+    for (const eiendom of eiendommer) {
+      let updated = false;
+
+      if (Array.isArray(eiendom.rooms)) {
+        for (let room of eiendom.rooms) {
+          if (!room.roomFrontImage) {
+            room.roomFrontImage = null;
+            updated = true;
+          }
+        }
+      }
+
+      if (updated) {
+        await collection.updateOne(
+          { _id: eiendom._id },
+          { $set: { rooms: eiendom.rooms } }
+        );
+      }
+    }
+
+    console.log('Image fields updated successfully.');
+  } catch (error) {
+    console.error('Error updating image fields:', error);
+  } finally {
+    await client.close();
+  }
+};
+
+updateImageFields().catch(console.error);

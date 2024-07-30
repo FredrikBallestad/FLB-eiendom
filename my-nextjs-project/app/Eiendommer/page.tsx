@@ -29,14 +29,14 @@ export default function Page() {
                 {eiendommer.map((eiendom: any) => (
                     <Link href={`/Eiendommer/${eiendom.slug}`} key={eiendom.slug}>
                         <div className="border rounded-lg shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 duration-200 bg-white h-[500px] flex flex-col p-4">
-                            {eiendom.imageUrl ? (
+                            {eiendom.propertyFrontImage ? (
                                 <img
-                                    src={eiendom.imageUrl}
+                                    src={eiendom.propertyFrontImage}
                                     alt={eiendom.title}
                                     className="w-full object-cover rounded-t-lg"
                                     style={{ height: '25rem' }}
                                     onError={(e) => {
-                                        console.error(`Error loading image: ${eiendom.imageUrl}`);
+                                        console.error(`Error loading image: ${eiendom.propertyFrontImage}`);
                                         const target = e.target as HTMLImageElement;
                                         target.onerror = null;
                                         target.src = 'https://via.placeholder.com/300';
