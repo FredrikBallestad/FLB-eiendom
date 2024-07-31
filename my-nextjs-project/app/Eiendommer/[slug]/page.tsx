@@ -25,12 +25,12 @@ const EiendomDetails = async ({ params }: EiendomDetailsProps) => {
       <Header />
       <EiendomImageGalleryClient images={eiendom.images} />
 
-      <div className="flex">
+      <div className="flex bg-gray-100">
         <div className="w-3/5 p-6 overflow-auto">
-          <h2 className="text-2xl font-semibold mb-4">{eiendom.address}</h2>
-          <p className="text-lg mb-4">{eiendom.description}</p>
+          <h2 className="text-2xl font-semibold mb-4 text-center" >{eiendom.address}</h2>
+          <p className="text-lg mb-4 text-center px-6">{eiendom.description}</p>
           {eiendom.rooms.map((room: any) => (
-            <div key={room.roomNumber} className="mb-6 border p-4 rounded-lg">
+            <div key={room.roomNumber} className="mb-6 border p-4 rounded-lg bg-white">
               <h2 className="text-xl font-semibold mb-2">Rom {room.roomNumber} - kr {room.price}</h2>
               <ul className="list-disc list-inside mb-2">
                 <li>Ca. {room.size} m²</li>
