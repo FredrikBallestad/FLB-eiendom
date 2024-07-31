@@ -48,24 +48,26 @@ const EiendomDetails = async ({ params }: EiendomDetailsProps) => {
           ))}
         </div>
 
-        <div className="w-2/5 p-6 bg-gray-100 sticky top-0 h-screen flex items-start justify-center">
-          <div className="bg-white p-4 rounded-lg shadow-lg mt-12">
-            <h2 className="text-2xl font-semibold mb-4">{eiendom.address}</h2>
-            <div className="mb-4">
-              <FontAwesomeIcon icon={faBed} className="h-6 w-6 inline-block" />
-              <span className="ml-2">{eiendom.bedrooms} Soverom</span>
-            </div>
-            <div className="mb-4">
-              <FontAwesomeIcon icon={faBath} className="h-6 w-6 inline-block" />
-              <span className="ml-2">{eiendom.bathrooms} Bad</span>
-            </div>
-            <div className="mb-4">
-              <FontAwesomeIcon icon={faCheck} className="h-6 w-6 inline-block" />
-              <span className="ml-2">{ledigeRom} Ledig(e) rom</span>
-            </div>
-            <div className="mb-4">
-              <FontAwesomeIcon icon={faRulerCombined} className="h-6 w-6 inline-block" />
-              <span className="ml-2">{eiendom.area} m²</span>
+        <div className="w-2/5 p-6 bg-gray-100 flex items-start justify-center">
+          <div className="sticky top-48">
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <h2 className="text-2xl font-semibold mb-4">{eiendom.address}</h2>
+              <div className="mb-4">
+                <FontAwesomeIcon icon={faBed} className="h-6 w-6 inline-block" />
+                <span className="ml-2">{eiendom.bedrooms} Soverom</span>
+              </div>
+              <div className="mb-4">
+                <FontAwesomeIcon icon={faBath} className="h-6 w-6 inline-block" />
+                <span className="ml-2">{eiendom.bathrooms} Bad</span>
+              </div>
+              <div className="mb-4">
+                <FontAwesomeIcon icon={faCheck} className="h-6 w-6 inline-block" />
+                <span className="ml-2">{ledigeRom} Ledig(e) rom</span>
+              </div>
+              <div className="mb-4">
+                <FontAwesomeIcon icon={faRulerCombined} className="h-6 w-6 inline-block" />
+                <span className="ml-2">{eiendom.area} m²</span>
+              </div>
             </div>
           </div>
         </div>
